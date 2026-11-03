@@ -5,7 +5,7 @@ plugins {
 android {
     namespace 'com.taxurfriends'
     compileSdk {
-        version = release(36) {
+        version = release(37) {
             minorApiLevel = 1
         }
     }
@@ -36,7 +36,8 @@ android {
 dependencies {
     implementation libs.appcompat
     implementation libs.material
-    implementation libs.room.common.jvm
+    implementation libs.room.runtime
+    annotationProcessor libs.room.compiler
     testImplementation libs.junit
     androidTestImplementation libs.espresso.core
     androidTestImplementation libs.ext.junit

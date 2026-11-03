@@ -11,13 +11,6 @@ import com.taxurfriends.domain.model.PeriodType;
 @Entity(tableName = "subscriptions",
         foreignKeys = {
                 @ForeignKey(
-                        entity = UserEntity.class,
-                        parentColumns = "id",
-                        childColumns = "userId",
-                        onDelete = ForeignKey.RESTRICT,
-                        onUpdate = ForeignKey.CASCADE
-                ),
-                @ForeignKey(
                         entity = PersonEntity.class,
                         parentColumns = "id",
                         childColumns = "personId",
@@ -26,8 +19,8 @@ import com.taxurfriends.domain.model.PeriodType;
                 )
         },
         indices = {
-            @Index("userId"),
-            @Index("personId")
+                @Index(value = "ownerId"),
+                @Index(value = "personId")
         }
 )
 public class SubEntity {
@@ -35,7 +28,7 @@ public class SubEntity {
     @NonNull
     private String id;
     @NonNull
-    private String userId;
+    private String ownerId;
     @NonNull
     private String personId;
     private int amount;
@@ -46,10 +39,10 @@ public class SubEntity {
     private long startDate;
     private boolean isActive;
 
-    public SubEntity(@NonNull String id, @NonNull String userId, @NonNull String personId, int amount,
+    public SubEntity(@NonNull String id, @NonNull String ownerId, @NonNull String personId, int amount,
                      int billPeriod, @NonNull PeriodType perType, long nextDate, long startDate, boolean isActive) {
         this.id = id;
-        this.userId = userId;
+        this.ownerId = ownerId;
         this.personId = personId;
         this.amount = amount;
         this.billPeriod = billPeriod;
@@ -69,12 +62,12 @@ public class SubEntity {
     }
 
     @NonNull
-    public String getUserId() {
-        return userId;
+    public String getOwnerId() {
+        return ownerId;
     }
 
-    public void setUserId(@NonNull String userId) {
-        this.userId = userId;
+    public void setOwnerId(@NonNull String ownerId) {
+        this.ownerId = ownerId;
     }
 
     @NonNull

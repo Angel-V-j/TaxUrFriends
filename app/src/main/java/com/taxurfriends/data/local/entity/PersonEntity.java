@@ -2,38 +2,24 @@ package com.taxurfriends.data.local.entity;
 
 import androidx.annotation.NonNull;
 import androidx.room.Entity;
-import androidx.room.ForeignKey;
 import androidx.room.Index;
 import androidx.room.PrimaryKey;
 
-@Entity(tableName = "people",
-        foreignKeys = {
-                @ForeignKey(
-                        entity = UserEntity.class,
-                        parentColumns = "id",
-                        childColumns = "userId",
-                        onDelete = ForeignKey.RESTRICT,
-                        onUpdate = ForeignKey.CASCADE
-                )
-        },
-        indices = {
-            @Index("userId")
-        }
-)
+@Entity(tableName = "people", indices = { @Index(value = "ownerId") })
 public class PersonEntity {
     @PrimaryKey
     @NonNull
     private String id;
     @NonNull
-    private String userId;
+    private String ownerId;
     @NonNull
     private String name;
     private int balance;
     private String info;
-    public PersonEntity(@NonNull String id, @NonNull String userId, @NonNull String name,
+    public PersonEntity(@NonNull String id, @NonNull String ownerId, @NonNull String name,
                         int balance, String info) {
         this.id = id;
-        this.userId = userId;
+        this.ownerId = ownerId;
         this.name = name;
         this.balance = balance;
         this.info = info;
@@ -49,12 +35,12 @@ public class PersonEntity {
     }
 
     @NonNull
-    public String getUserId() {
-        return userId;
+    public String getOwnerId() {
+        return ownerId;
     }
 
-    public void setUserId(@NonNull String userId) {
-        this.userId = userId;
+    public void setOwnerId(@NonNull String ownerId) {
+        this.ownerId = ownerId;
     }
 
     @NonNull

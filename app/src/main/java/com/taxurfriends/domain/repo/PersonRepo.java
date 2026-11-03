@@ -5,7 +5,7 @@ import com.taxurfriends.domain.model.Person;
 import java.util.List;
 
 public interface PersonRepo {
-    List<Person> observeByOwner(String personId);
+    List<Person> observeByOwner(String userId);
     void save(Person person);
     void del(String personId);
 }

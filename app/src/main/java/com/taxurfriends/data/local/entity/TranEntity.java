@@ -9,13 +9,6 @@ import androidx.room.PrimaryKey;
 @Entity(tableName = "transactions",
         foreignKeys = {
                 @ForeignKey(
-                        entity = UserEntity.class,
-                        parentColumns = "id",
-                        childColumns = "userId",
-                        onDelete = ForeignKey.RESTRICT,
-                        onUpdate = ForeignKey.CASCADE
-                ),
-                @ForeignKey(
                         entity = SubEntity.class,
                         parentColumns = "id",
                         childColumns = "subId",
@@ -24,8 +17,8 @@ import androidx.room.PrimaryKey;
                 )
         },
         indices = {
-                @Index("userId"),
-                @Index("subId")
+                @Index(value = "ownerId"),
+                @Index(value = "subId")
         }
 )
 public class TranEntity {
@@ -33,7 +26,7 @@ public class TranEntity {
     @NonNull
     private String id;
     @NonNull
-    private String userId;
+    private String ownerId;
     @NonNull
     private String subId;
     private int amount;
@@ -41,10 +34,10 @@ public class TranEntity {
     private long date;
     private String description;
 
-    public TranEntity(@NonNull String id, @NonNull String userId, @NonNull String subId,
+    public TranEntity(@NonNull String id, @NonNull String ownerId, @NonNull String subId,
                       int amount, boolean isBilling, long date, String description) {
         this.id = id;
-        this.userId = userId;
+        this.ownerId = ownerId;
         this.subId = subId;
         this.amount = amount;
         this.isBilling = isBilling;
@@ -62,12 +55,12 @@ public class TranEntity {
     }
 
     @NonNull
-    public String getUserId() {
-        return userId;
+    public String getOwnerId() {
+        return ownerId;
     }
 
-    public void setUserId(@NonNull String userId) {
-        this.userId = userId;
+    public void setOwnerId(@NonNull String ownerId) {
+        this.ownerId = ownerId;
     }
 
     @NonNull
