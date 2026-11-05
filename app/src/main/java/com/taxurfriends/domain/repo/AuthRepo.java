@@ -4,8 +4,9 @@ import com.taxurfriends.domain.model.User;
 
 public interface AuthRepo {
     User observeCurrUser();
-    User offRegister(String name);
+    User offlineRegister(String name, String email);
     User restoreLocalProfile();
-    User login(String name);
+    void
+    login(String name, String email);
     void logout();
 }

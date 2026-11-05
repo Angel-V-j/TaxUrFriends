@@ -8,7 +8,6 @@ public class PersonMapper {
         return new PersonEntity(person.getId(),
                 person.getUserId(),
                 person.getName(),
-                person.getBalance(),
                 person.getInfo());
     }
 
@@ -16,7 +15,6 @@ public class PersonMapper {
         return new Person(entity.getId(),
                 entity.getOwnerId(),
                 entity.getName(),
-                entity.getBalance(),
                 entity.getInfo());
     }
 }

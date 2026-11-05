@@ -2,10 +2,22 @@ package com.taxurfriends.data.local.entity;
 
 import androidx.annotation.NonNull;
 import androidx.room.Entity;
+import androidx.room.ForeignKey;
 import androidx.room.Index;
 import androidx.room.PrimaryKey;
 
-@Entity(tableName = "people", indices = { @Index(value = "ownerId") })
+@Entity(tableName = "people",
+        foreignKeys = {
+                @ForeignKey(
+                        entity = UserEntity.class,
+                        parentColumns = "id",
+                        childColumns = "ownerId",
+                        onDelete = ForeignKey.RESTRICT,
+                        onUpdate = ForeignKey.CASCADE
+                )
+        },
+        indices = { @Index(value = "ownerId") }
+)
 public class PersonEntity {
     @PrimaryKey
     @NonNull
@@ -14,14 +26,11 @@ public class PersonEntity {
     private String ownerId;
     @NonNull
     private String name;
-    private int balance;
     private String info;
-    public PersonEntity(@NonNull String id, @NonNull String ownerId, @NonNull String name,
-                        int balance, String info) {
+    public PersonEntity(@NonNull String id, @NonNull String ownerId, @NonNull String name, String info) {
         this.id = id;
         this.ownerId = ownerId;
         this.name = name;
-        this.balance = balance;
         this.info = info;
     }
 
@@ -50,14 +59,6 @@ public class PersonEntity {
 
     public void setName(@NonNull String name) {
         this.name = name;
-    }
-
-    public int getBalance() {
-        return balance;
-    }
-
-    public void setBalance(int balance) {
-        this.balance = balance;
     }
 
     public String getInfo() {

@@ -11,6 +11,13 @@ import com.taxurfriends.domain.model.PeriodType;
 @Entity(tableName = "subscriptions",
         foreignKeys = {
                 @ForeignKey(
+                        entity = UserEntity.class,
+                        parentColumns = "id",
+                        childColumns = "ownerId",
+                        onDelete = ForeignKey.RESTRICT,
+                        onUpdate = ForeignKey.CASCADE
+                ),
+                @ForeignKey(
                         entity = PersonEntity.class,
                         parentColumns = "id",
                         childColumns = "personId",

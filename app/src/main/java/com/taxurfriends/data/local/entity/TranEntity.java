@@ -9,6 +9,13 @@ import androidx.room.PrimaryKey;
 @Entity(tableName = "transactions",
         foreignKeys = {
                 @ForeignKey(
+                        entity = UserEntity.class,
+                        parentColumns = "id",
+                        childColumns = "ownerId",
+                        onDelete = ForeignKey.RESTRICT,
+                        onUpdate = ForeignKey.CASCADE
+                ),
+                @ForeignKey(
                         entity = SubEntity.class,
                         parentColumns = "id",
                         childColumns = "subId",
